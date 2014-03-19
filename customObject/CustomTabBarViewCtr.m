@@ -13,6 +13,7 @@
 #import "SecondViewController.h"
 #import "ThirdViewController.h"
 #import "FourthViewController.h"
+#import "Custombutton.h"
 
 #define TabBarHeight 48
 
@@ -62,54 +63,65 @@
 
 }
 
--(void)btnClick:(UIButton *)apBtn
+-(void)showMenuView
 {
-    NSArray * ary = [NSArray arrayWithObjects:@"firstGray.png",@"secondGray.png",@"thirdGray.png",@"fourthGray.png", nil];
-    NSArray * ary2 = [NSArray arrayWithObjects:@"firstYellow.png",@"secondYellow.png",@"thirdYellow.png",@"fourthYellow.png", nil];
+    [UIView animateWithDuration:0.5 animations:^{
+        mpMenuView.frame = CGRectMake(40, 20, 200, 1000);
+    } completion:nil];
+}
 
-    for (int i = 0; i < 4; i++) {
-        UIButton * btn = (UIButton *)[mpView viewWithTag:100+i];
-        [btn setBackgroundImage:[UIImage imageNamed:[ary objectAtIndex:i]] forState:UIControlStateNormal];
-        btn.userInteractionEnabled = YES;
+-(void)hideMenuView
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        mpMenuView.frame = CGRectMake(40, 20, 200, 40);
+    } completion:nil];
+}
+
+-(void)btnClick:(Custombutton *)apBtn
+{
+    if (apBtn.tag == 100) {
+        if (apBtn.currentSeleted == NO) {
+            [self showMenuView];
+        } else {
+            [self hideMenuView];
+            self.selectedIndex = 0;
+        }
+        apBtn.currentSeleted = !apBtn.currentSeleted;
     }
-    apBtn.userInteractionEnabled = NO;
-    [apBtn setBackgroundImage:[UIImage imageNamed:[ary2 objectAtIndex:apBtn.tag - 100]] forState:UIControlStateNormal];
-    [apBtn setBackgroundImage:[UIImage imageNamed:[ary2 objectAtIndex:apBtn.tag - 100]] forState:UIControlStateHighlighted];
+    
+    return;
+    
+//    NSArray * ary = [NSArray arrayWithObjects:@"firstGray.png",@"secondGray.png",@"thirdGray.png",@"fourthGray.png", nil];
+//    NSArray * ary2 = [NSArray arrayWithObjects:@"firstYellow.png",@"secondYellow.png",@"thirdYellow.png",@"fourthYellow.png", nil];
+//
+//    for (int i = 0; i < 4; i++) {
+//        UIButton * btn = (UIButton *)[mpView viewWithTag:100+i];
+//        [btn setBackgroundImage:[UIImage imageNamed:[ary objectAtIndex:i]] forState:UIControlStateNormal];
+//        btn.userInteractionEnabled = YES;
+//    }
+//    apBtn.userInteractionEnabled = NO;
+//    [apBtn setBackgroundImage:[UIImage imageNamed:[ary2 objectAtIndex:apBtn.tag - 100]] forState:UIControlStateNormal];
+//    [apBtn setBackgroundImage:[UIImage imageNamed:[ary2 objectAtIndex:apBtn.tag - 100]] forState:UIControlStateHighlighted];
 
     self.selectedIndex = apBtn.tag-100;
 }
 
+
+
 -(void)addCustomTabBarView
 {
-    mpView = [[UIView alloc] initWithFrame:CGRectMake(0, 44+20, 60.0, 748-44)];
-    mpView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"purpleSmall.png"]];
-    [self.view addSubview:mpView];
+    mpMenuView = [[UIView alloc] initWithFrame:CGRectMake(40, 20, 200.0, 40)];
+    mpMenuView.backgroundColor = [UIColor greenColor];
+    mpMenuView.backgroundColor = [UIColor greenColor];
+    mpMenuView.clipsToBounds = YES;
     
     
-    NSArray * ary = [NSArray arrayWithObjects:@"firstGray.png",@"secondGray.png",@"thirdGray.png",@"fourthGray.png", nil];
-    float width = 60.0;
-//    float heigh = (748.0-44.0-100)/4;
-    float heigh = 120.0f;
-
-
-    for (int i = 0; i < 4; i++) {
-        UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, heigh*i, width, heigh)];
-        if (i == 0) {
-            [btn setBackgroundImage:[UIImage imageNamed:@"firstYellow.png"] forState:UIControlStateNormal];
-        } else {
-            [btn setBackgroundImage:[UIImage imageNamed:[ary objectAtIndex:i]] forState:UIControlStateNormal];
-        }
-        
-        if (i == 0) {
-            btn.backgroundColor = [UIColor darkGrayColor];
-        } else {
-            btn.backgroundColor = [UIColor grayColor];
-        }
-        
-        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
-        btn.tag = 100+i;
-        [mpView addSubview:btn];
-    }
+    Custombutton * btn = [Custombutton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(40, 20, 200.0, 40);
+    btn.tag = 100;
+    [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
+    [mpMenuView addSubview:btn];
+    [self.view addSubview:mpMenuView];
 }
 
 - (void)reRectSubViews
@@ -133,6 +145,32 @@
 	}
 }
 
+-(void)addMenuBtns
+{
+    NSArray * ary = [NSArray arrayWithObjects:@"firstGray.png",@"secondGray.png",@"thirdGray.png",@"fourthGray.png", nil];
+    float width = 200.0;
+    float heigh = 150.0f;
+    
+    for (int i = 0; i < 4; i++) {
+        Custombutton * btn = [[Custombutton alloc] initWithFrame:CGRectMake(0, heigh*i+40, width, heigh)];
+        if (i == 0) {
+            [btn setBackgroundImage:[UIImage imageNamed:@"firstYellow.png"] forState:UIControlStateNormal];
+        } else {
+            [btn setBackgroundImage:[UIImage imageNamed:[ary objectAtIndex:i]] forState:UIControlStateNormal];
+        }
+        
+        if (i == 0) {
+            btn.backgroundColor = [UIColor darkGrayColor];
+        } else {
+            btn.backgroundColor = [UIColor grayColor];
+        }
+        
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
+        btn.tag = 101+i;
+        [mpMenuView addSubview:btn];
+    }
+
+}
 
 - (void)viewDidLoad
 {
@@ -141,15 +179,8 @@
     [self reRectSubViews];
     [self addViewCtrs];
     [self addCustomTabBarView];
-	// Do any additional setup after loading the view.
+    [self addMenuBtns];
 }
-
-
-//-(BOOL)shouldAutorotate
-//{
-//    return YES;
-//}
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
     if (toInterfaceOrientation == UIDeviceOrientationLandscapeRight
@@ -160,22 +191,10 @@
     }
 }
 
-//- (BOOL) shouldAutorotate {
-//    UIViewController *controller = self.selectedViewController;
-//    if ([controller isKindOfClass:[UINavigationController class]])
-//        controller = [(UINavigationController *)controller visibleViewController];
-//    if ([controller isKindOfClass:NSClassFromString(@"MPInlineVideoFullscreenViewController")]) {
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-//}
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

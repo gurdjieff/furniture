@@ -13,7 +13,10 @@
 @interface BaseViewController : UIViewController
 {
     NSOperationQueue * mpOperationQueue;
-    UIImageView * mpNavitateView;
+    UIImageView * mpNavitateViewTop;
+    UIImageView * mpNavitateViewBottom;
+
+
     UILabel * mpTitleLabel;
     @public
     UIView * mpBaseView;

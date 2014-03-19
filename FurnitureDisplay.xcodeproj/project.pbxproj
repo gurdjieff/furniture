@@ -121,6 +121,7 @@
 		41E2AD3A18D987E1007E7CD1 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E2AD3918D987E1007E7CD1 /* SecondViewController.m */; };
 		41E2AD3D18D98834007E7CD1 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E2AD3C18D98834007E7CD1 /* ThirdViewController.m */; };
 		41E2AD4018D98843007E7CD1 /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E2AD3F18D98843007E7CD1 /* FourthViewController.m */; };
+		41E2AD4318D99557007E7CD1 /* Custombutton.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E2AD4218D99557007E7CD1 /* Custombutton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -264,6 +265,8 @@
 		41E2AD3C18D98834007E7CD1 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		41E2AD3E18D98843007E7CD1 /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
 		41E2AD3F18D98843007E7CD1 /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
+		41E2AD4118D99557007E7CD1 /* Custombutton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Custombutton.h; sourceTree = "<group>"; };
+		41E2AD4218D99557007E7CD1 /* Custombutton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Custombutton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +378,8 @@
 				41E2AB6B18D981EF007E7CD1 /* CustomNavigationViewCtr.m */,
 				41E2AB6C18D981EF007E7CD1 /* CustomTabBarViewCtr.h */,
 				41E2AB6D18D981EF007E7CD1 /* CustomTabBarViewCtr.m */,
+				41E2AD4118D99557007E7CD1 /* Custombutton.h */,
+				41E2AD4218D99557007E7CD1 /* Custombutton.m */,
 			);
 			path = customObject;
 			sourceTree = "<group>";
@@ -695,6 +700,7 @@
 				41E2AD3D18D98834007E7CD1 /* ThirdViewController.m in Sources */,
 				41E2AD3718D987C9007E7CD1 /* FirstViewController.m in Sources */,
 				41E2AB8418D982A4007E7CD1 /* NSString+CustomCategory.m in Sources */,
+				41E2AD4318D99557007E7CD1 /* Custombutton.m in Sources */,
 				41E2AB8218D982A4007E7CD1 /* Common.m in Sources */,
 				41E2AB4418D97F4B007E7CD1 /* AppDelegate.m in Sources */,
 				41E2AB8718D982A4007E7CD1 /* UIView+ViewFrameGeometry.m in Sources */,

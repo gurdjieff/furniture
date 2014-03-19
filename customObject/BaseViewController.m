@@ -38,7 +38,7 @@
     UIButton * lpLeftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [lpLeftBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [lpLeftBtn setBackgroundImage:[UIImage imageNamed:@"navigateBack.png"] forState:UIControlStateNormal];
-    [mpNavitateView addSubview:lpLeftBtn];
+    [mpNavitateViewBottom addSubview:lpLeftBtn];
 }
 
 -(void)addBaseSubviews
@@ -48,23 +48,31 @@
     mpBaseView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mpBaseView];
 
-    mpNavitateView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 748-44, 1024, 44)];
-    mpNavitateView.image = [UIImage imageNamed:@"navigatebar.png"];
-    [self.view addSubview:mpNavitateView];
-    mpNavitateView.userInteractionEnabled = YES;
+    mpNavitateViewTop = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1024, 44)];
+    mpNavitateViewTop.image = [UIImage imageNamed:@"navigatebar.png"];
+    [self.view addSubview:mpNavitateViewTop];
+    mpNavitateViewTop.userInteractionEnabled = YES;
     
-    mpTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, 1024-44*2, 44)];
-    mpTitleLabel.backgroundColor = [UIColor clearColor];
-    mpTitleLabel.textColor = [UIColor whiteColor];
-    mpTitleLabel.textAlignment = NSTextAlignmentCenter;
-    mpTitleLabel.font = [UIFont boldSystemFontOfSize:22];
-    [mpNavitateView addSubview:mpTitleLabel];
+    mpNavitateViewBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0, 748-44, 1024, 44)];
+    mpNavitateViewBottom.image = [UIImage imageNamed:@"navigatebar.png"];
+    [self.view addSubview:mpNavitateViewBottom];
+    mpNavitateViewBottom.userInteractionEnabled = YES;
+
+    
+//    mpTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, 1024-44*2, 44)];
+//    mpTitleLabel.backgroundColor = [UIColor clearColor];
+//    mpTitleLabel.textColor = [UIColor whiteColor];
+//    mpTitleLabel.textAlignment = NSTextAlignmentCenter;
+//    mpTitleLabel.font = [UIFont boldSystemFontOfSize:22];
+//    [mpNavitateViewTop addSubview:mpTitleLabel];
     
     int version = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (version >= 7.0) {
 //        self.edgesForExtendedLayout = UIRectEdgeNone;
         mpBaseView.frame = CGRectMake(60, 44+20, 1024-60, 748);
-        mpNavitateView.frame = CGRectMake(0, 748-44+20, 1024, 44);
+        mpNavitateViewTop.frame = CGRectMake(0, 20, 1024, 44);
+        mpNavitateViewBottom.frame = CGRectMake(0, 748-44+20, 1024, 44);
+
     }
 }
 
@@ -90,6 +98,27 @@
     
     mpBaseView.backgroundColor = [UIColor colorWithRed:0xe6/255.0 green:0xe4/255.0 blue:0xe2/255.0 alpha:1.0];
     [self addBaseSubviews];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        if (mpNavitateViewBottom.alpha) {
+            mpNavitateViewTop.alpha = 0.0;
+            mpNavitateViewBottom.alpha = 0.0;
+        } else {
+            mpNavitateViewTop.alpha = 1.0;
+            mpNavitateViewBottom.alpha = 1.0;
+        }
+    } completion:^(BOOL finish) {
+        if (mpNavitateViewBottom.userInteractionEnabled) {
+            mpNavitateViewTop.userInteractionEnabled = NO;
+            mpNavitateViewBottom.userInteractionEnabled = NO;
+        } else {
+            mpNavitateViewTop.userInteractionEnabled = YES;
+            mpNavitateViewBottom.userInteractionEnabled = YES;
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning

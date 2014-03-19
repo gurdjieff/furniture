@@ -10,7 +10,7 @@
 
 @interface CustomTabBarViewCtr : UITabBarController
 {
-    UIView * mpView;
+    UIView * mpMenuView;
 }
 
 +(CustomTabBarViewCtr *)shareTabBarViewCtr;
