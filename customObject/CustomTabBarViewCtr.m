@@ -147,6 +147,8 @@
 
 -(void)addMenuBtns
 {
+    
+    
     NSArray * ary = [NSArray arrayWithObjects:@"firstGray.png",@"secondGray.png",@"thirdGray.png",@"fourthGray.png", nil];
     float width = 200.0;
     float heigh = 150.0f;
