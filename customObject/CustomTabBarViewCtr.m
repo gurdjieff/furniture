@@ -47,7 +47,6 @@
     FirstViewController * fvc = [[FirstViewController alloc] init];
     CustomNavigationViewCtr * cvc1 = [[CustomNavigationViewCtr alloc] initWithRootViewController:fvc];
     
-    
     SecondViewController * svc = [[SecondViewController alloc] init];
     CustomNavigationViewCtr * cvc2 = [[CustomNavigationViewCtr alloc] initWithRootViewController:svc];
     
@@ -76,6 +75,28 @@
     } completion:nil];
 }
 
+-(void)showMenusViewOne
+{
+    mpMenuView1.frame = CGRectMake(0, 40, 200, 60 * 10);
+}
+
+-(void)showMenusViewTwo
+{
+    mpMenuView2.frame = CGRectMake(0, 40, 200, 60 * 10);
+}
+
+-(void)showMenusViewThree
+{
+    mpMenuView3.frame = CGRectMake(0, 40, 200, 60 * 10);
+}
+
+-(void)showMenusViewFour
+{
+    mpMenuView4.frame = CGRectMake(0, 40, 200, 60 * 10);
+}
+
+
+
 -(void)headBtnClick:(Custombutton *)apBtn
 {
     if (apBtn.tag == 100) {
@@ -89,19 +110,6 @@
     }
     
     return;
-    
-//    NSArray * ary = [NSArray arrayWithObjects:@"firstGray.png",@"secondGray.png",@"thirdGray.png",@"fourthGray.png", nil];
-//    NSArray * ary2 = [NSArray arrayWithObjects:@"firstYellow.png",@"secondYellow.png",@"thirdYellow.png",@"fourthYellow.png", nil];
-//
-//    for (int i = 0; i < 4; i++) {
-//        UIButton * btn = (UIButton *)[mpView viewWithTag:100+i];
-//        [btn setBackgroundImage:[UIImage imageNamed:[ary objectAtIndex:i]] forState:UIControlStateNormal];
-//        btn.userInteractionEnabled = YES;
-//    }
-//    apBtn.userInteractionEnabled = NO;
-//    [apBtn setBackgroundImage:[UIImage imageNamed:[ary2 objectAtIndex:apBtn.tag - 100]] forState:UIControlStateNormal];
-//    [apBtn setBackgroundImage:[UIImage imageNamed:[ary2 objectAtIndex:apBtn.tag - 100]] forState:UIControlStateHighlighted];
-
     self.selectedIndex = apBtn.tag-100;
 }
 
@@ -170,6 +178,14 @@
     }
 }
 
+-(void)initMenuViews
+{
+    mpMenuView1 = [[UIView alloc] init];
+    mpMenuView2 = [[UIView alloc] init];
+    mpMenuView3 = [[UIView alloc] init];
+    mpMenuView4 = [[UIView alloc] init];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -178,6 +194,8 @@
     [self addViewCtrs];
     [self addCustomTabBarView];
     [self addMenuBtns];
+    [self initMenuViews];
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{

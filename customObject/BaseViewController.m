@@ -56,12 +56,38 @@
     [mpNavitateViewTop addSubview:lpLeftBtn];
 }
 
+-(void)scrollViewTap:(UITapGestureRecognizer *)gesture
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        if (mpNavitateViewBottom.alpha) {
+            mpNavitateViewTop.alpha = 0.0;
+            mpNavitateViewBottom.alpha = 0.0;
+        } else {
+            mpNavitateViewTop.alpha = 1.0;
+            mpNavitateViewBottom.alpha = 1.0;
+        }
+    } completion:^(BOOL finish) {
+        if (mpNavitateViewBottom.userInteractionEnabled) {
+            mpNavitateViewTop.userInteractionEnabled = NO;
+            mpNavitateViewBottom.userInteractionEnabled = NO;
+        } else {
+            mpNavitateViewTop.userInteractionEnabled = YES;
+            mpNavitateViewBottom.userInteractionEnabled = YES;
+        }
+    }];
+}
+
 -(void)addBaseSubviews
 {
-    mpBaseView = [[UIView alloc] initWithFrame:CGRectMake(60, 44, 1024-60, 748-44)];
+    mpBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 748-44)];
     mpBaseView.userInteractionEnabled = YES;
     mpBaseView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mpBaseView];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTap:)];
+    [mpBaseView addGestureRecognizer:tapGesture];
+    tapGesture.cancelsTouchesInView = NO;
+
 
     mpNavitateViewTop = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1024, 44)];
     mpNavitateViewTop.image = [UIImage imageNamed:@"navigatebar.png"];
@@ -83,8 +109,8 @@
     
     int version = [[[UIDevice currentDevice] systemVersion] floatValue];
     if (version >= 7.0) {
-//        self.edgesForExtendedLayout = UIRectEdgeNone;
-        mpBaseView.frame = CGRectMake(60, 44+20, 1024-60, 748);
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        mpBaseView.frame = CGRectMake(0, 20, 1024, 748);
         mpNavitateViewTop.frame = CGRectMake(0, 20, 1024, 44);
         mpNavitateViewBottom.frame = CGRectMake(0, 748-44+20, 1024, 44);
 
