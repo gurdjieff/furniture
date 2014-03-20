@@ -33,12 +33,27 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+-(void)rightBtnClick
+{
+    
+}
+
+
 -(void)addLeftButton
 {
     UIButton * lpLeftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [lpLeftBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [lpLeftBtn setBackgroundImage:[UIImage imageNamed:@"navigateBack.png"] forState:UIControlStateNormal];
     [mpNavitateViewBottom addSubview:lpLeftBtn];
+}
+
+-(void)topNavigatorAddRightBtn
+{
+    UIButton * lpLeftBtn = [[UIButton alloc] initWithFrame:CGRectMake(1024-220, 0, 44, 44)];
+    [lpLeftBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [lpLeftBtn setBackgroundImage:[UIImage imageNamed:@"navigateBack.png"] forState:UIControlStateNormal];
+    [mpNavitateViewTop addSubview:lpLeftBtn];
 }
 
 -(void)addBaseSubviews
@@ -98,6 +113,8 @@
     
     mpBaseView.backgroundColor = [UIColor colorWithRed:0xe6/255.0 green:0xe4/255.0 blue:0xe2/255.0 alpha:1.0];
     [self addBaseSubviews];
+    [self topNavigatorAddRightBtn];
+
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

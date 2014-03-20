@@ -60,13 +60,12 @@
     
     NSArray * aryTemp = [NSArray arrayWithObjects:cvc1,cvc2,cvc3,cvc4, nil];
     self.viewControllers = aryTemp;
-
 }
 
 -(void)showMenuView
 {
     [UIView animateWithDuration:0.5 animations:^{
-        mpMenuView.frame = CGRectMake(40, 20, 200, 1000);
+        mpMenuView.frame = CGRectMake(40, 20, 200, 60*(4+1));
     } completion:nil];
 }
 
@@ -77,7 +76,7 @@
     } completion:nil];
 }
 
--(void)btnClick:(Custombutton *)apBtn
+-(void)headBtnClick:(Custombutton *)apBtn
 {
     if (apBtn.tag == 100) {
         if (apBtn.currentSeleted == NO) {
@@ -107,19 +106,30 @@
 }
 
 
+-(void)menuBtnClick:(Custombutton *)apBtn
+{
+    if (apBtn.tag == 100) {
+        
+    } else if (apBtn.tag == 101) {
+    
+    } else if (apBtn.tag == 102) {
+        
+    } else if (apBtn.tag == 103) {
+        
+    }
+}
 
 -(void)addCustomTabBarView
 {
     mpMenuView = [[UIView alloc] initWithFrame:CGRectMake(40, 20, 200.0, 40)];
-    mpMenuView.backgroundColor = [UIColor greenColor];
-    mpMenuView.backgroundColor = [UIColor greenColor];
+    mpMenuView.backgroundColor = [UIColor grayColor];
     mpMenuView.clipsToBounds = YES;
     
-    
     Custombutton * btn = [Custombutton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(40, 20, 200.0, 40);
+    btn.backgroundColor = [UIColor greenColor];
+    btn.frame = CGRectMake(0, 0, 200.0, 40);
     btn.tag = 100;
-    [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
+    [btn addTarget:self action:@selector(headBtnClick:) forControlEvents:UIControlEventTouchDown];
     [mpMenuView addSubview:btn];
     [self.view addSubview:mpMenuView];
 }
@@ -147,31 +157,17 @@
 
 -(void)addMenuBtns
 {
-    
-    
-    NSArray * ary = [NSArray arrayWithObjects:@"firstGray.png",@"secondGray.png",@"thirdGray.png",@"fourthGray.png", nil];
     float width = 200.0;
-    float heigh = 150.0f;
+    float heigh = 60.0f;
+    NSArray * lpAry = [NSArray arrayWithObjects:@"关于我们",@"大师之家",@"设计师推荐",@"顶层活动", nil];
     
     for (int i = 0; i < 4; i++) {
         Custombutton * btn = [[Custombutton alloc] initWithFrame:CGRectMake(0, heigh*i+40, width, heigh)];
-        if (i == 0) {
-            [btn setBackgroundImage:[UIImage imageNamed:@"firstYellow.png"] forState:UIControlStateNormal];
-        } else {
-            [btn setBackgroundImage:[UIImage imageNamed:[ary objectAtIndex:i]] forState:UIControlStateNormal];
-        }
-        
-        if (i == 0) {
-            btn.backgroundColor = [UIColor darkGrayColor];
-        } else {
-            btn.backgroundColor = [UIColor grayColor];
-        }
-        
-        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];
-        btn.tag = 101+i;
+        [btn setTitle:lpAry[i] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(menuBtnClick:) forControlEvents:UIControlEventTouchDown];
+        btn.tag = 100+i;
         [mpMenuView addSubview:btn];
     }
-
 }
 
 - (void)viewDidLoad

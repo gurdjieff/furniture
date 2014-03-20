@@ -25,5 +25,8 @@
 
 
 -(void)addLeftButton;
+-(void)topNavigatorAddRightBtn;
+-(void)rightBtnClick;
+
 
 @end
