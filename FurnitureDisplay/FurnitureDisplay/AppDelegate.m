@@ -16,7 +16,6 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    
     CustomTabBarViewCtr * ctvc = [CustomTabBarViewCtr shareTabBarViewCtr];
     self.window.rootViewController = ctvc;
     [self.window makeKeyAndVisible];
