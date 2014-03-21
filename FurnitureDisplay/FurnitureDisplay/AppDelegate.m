@@ -20,8 +20,6 @@
     CustomTabBarViewCtr * ctvc = [CustomTabBarViewCtr shareTabBarViewCtr];
     self.window.rootViewController = ctvc;
     [self.window makeKeyAndVisible];
-    
-    [self.window makeKeyAndVisible];
     return YES;
 }
 
